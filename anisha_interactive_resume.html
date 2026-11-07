@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Interactive resume of Anisha Verma, aspiring Financial Data Analyst.">
+<title>Anisha Verma | Interactive Resume</title>
+<style>
+:root {
+  --bg: #f3f6fb; --surface: #ffffff; --text: #1d2939; --muted: #667085;
+  --primary: #17365d; --accent: #4f83bd; --line: #e4eaf2; --chip: #edf3fa;
+  --shadow: 0 16px 45px rgba(24, 49, 80, .10);
+}
+body.dark {
+  --bg: #101923; --surface: #182635; --text: #edf3fa; --muted: #b0bdcc;
+  --primary: #9fc5ee; --accent: #83b6ec; --line: #304255; --chip: #26394d;
+  --shadow: 0 16px 45px rgba(0, 0, 0, .25);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif; line-height: 1.65;
+  transition: background .25s, color .25s;
+}
+a { color: var(--accent); }
+.topbar {
+  position: sticky; top: 0; z-index: 10; background: var(--surface);
+  border-bottom: 1px solid var(--line); padding: 12px 5%;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+}
+.brand { font-weight: 800; letter-spacing: .04em; color: var(--primary); }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+button, .nav a {
+  border: 1px solid var(--line); background: var(--surface); color: var(--text);
+  border-radius: 9px; padding: 9px 13px; cursor: pointer; font-size: 13px;
+  text-decoration: none; transition: .2s;
+}
+button:hover, .nav a:hover { border-color: var(--accent); transform: translateY(-1px); }
+button.primary { background: #17365d; color: white; border-color: #17365d; }
+.hero {
+  background: linear-gradient(120deg, #102b4d, #245887 65%, #477cae);
+  color: white; padding: 62px max(7%, calc((100% - 1080px)/2)) 54px;
+}
+.hero-inner { max-width: 1080px; margin: auto; display: flex; justify-content: space-between; align-items: center; gap: 28px; }
+.eyebrow { color: #c7ddf4; text-transform: uppercase; letter-spacing: .17em; font-size: 11px; font-weight: 700; }
+h1 { font-size: clamp(36px, 6vw, 58px); line-height: 1.08; margin: 9px 0; letter-spacing: -.04em; }
+.role { font-size: 19px; color: #d9e9f8; margin: 0 0 18px; }
+.hero p { color: #e2edf8; margin: 5px 0; font-size: 14px; }
+.hero a { color: white; text-decoration: none; }
+.hero a:hover { text-decoration: underline; }
+.initials {
+  width: 116px; height: 116px; border: 1px solid rgba(255,255,255,.45);
+  border-radius: 28px; display: grid; place-items: center; flex-shrink: 0;
+  font-size: 37px; font-weight: 800; background: rgba(255,255,255,.12);
+}
+.nav {
+  max-width: 1080px; margin: 22px auto 0; padding: 0 22px;
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.nav a { font-size: 12px; background: var(--surface); }
+main { max-width: 1080px; margin: 24px auto 70px; padding: 0 22px; }
+.layout { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(250px, .8fr); gap: 20px; align-items: start; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 17px;
+  padding: 25px; box-shadow: var(--shadow); margin-bottom: 18px;
+}
+.section-title {
+  color: var(--primary); font-size: 16px; text-transform: uppercase;
+  letter-spacing: .1em; margin: 0 0 16px; display: flex; align-items: center; gap: 10px;
+}
+.section-title:after { content: ""; height: 1px; background: var(--line); flex: 1; }
+p { margin-top: 0; }
+.summary { color: var(--muted); font-size: 14px; }
+.entry { padding: 0 0 18px 17px; border-left: 2px solid var(--line); position: relative; }
+.entry:last-child { padding-bottom: 0; }
+.entry:before { content: ""; position: absolute; left: -6px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+.entry h3 { margin: 0; font-size: 15px; }
+.sub { color: var(--muted); font-size: 12px; margin: 2px 0 8px; }
+ul { padding-left: 19px; margin: 8px 0 0; color: var(--muted); font-size: 13px; }
+li { margin: 5px 0; }
+.skills { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: var(--chip); color: var(--primary); border-radius: 7px; padding: 6px 10px; font-size: 12px; }
+.skill-group { margin-bottom: 14px; }
+.skill-group:last-child { margin-bottom: 0; }
+.skill-group strong { display: block; font-size: 12px; margin-bottom: 7px; }
+.contact-list { display: grid; gap: 10px; font-size: 13px; }
+.contact-list a { text-decoration: none; overflow-wrap: anywhere; }
+.contact-list a:hover { text-decoration: underline; }
+.stat { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.stat:last-child { border: 0; }
+.stat span:last-child { color: var(--muted); text-align: right; }
+.project { border: 1px solid var(--line); border-radius: 11px; margin: 10px 0; overflow: hidden; }
+.project-toggle {
+  width: 100%; display: flex; justify-content: space-between; text-align: left;
+  border: 0; border-radius: 0; padding: 13px 14px; font-weight: 700;
+  background: var(--surface); color: var(--text);
+}
+.project-detail { display: none; padding: 0 15px 14px; color: var(--muted); font-size: 13px; }
+.project.open .project-detail { display: block; }
+.project.open .chevron { transform: rotate(180deg); }
+.chevron { transition: transform .2s; }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px; }
+#toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #17365d; color: white; padding: 10px 15px; border-radius: 9px; display: none; font-size: 13px; z-index: 20; }
+@media(max-width: 760px) {
+  .layout { grid-template-columns: 1fr; }
+  .hero-inner { align-items: flex-start; }
+  .initials { width: 75px; height: 75px; border-radius: 20px; font-size: 26px; }
+  .hero { padding-top: 42px; }
+}
+@media(max-width: 480px) {
+  .topbar { align-items: flex-start; flex-direction: column; }
+  .hero-inner { flex-direction: column-reverse; }
+  .initials { display: none; }
+  .card { padding: 19px; }
+}
+@media print {
+  :root, body.dark { --bg: white; --surface: white; --text: #222; --muted: #555; --primary: #17365d; --line: #ddd; --chip: #edf3fa; }
+  body { background: white; color: #222; font-size: 11px; }
+  .topbar, .nav, .actions, footer, #toast { display: none !important; }
+  .hero { padding: 22px 30px; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .hero-inner { max-width: none; }
+  h1 { font-size: 30px; }
+  main { margin: 12px auto; padding: 0 20px; }
+  .layout { grid-template-columns: 1.5fr 1fr; gap: 10px; }
+  .card { box-shadow: none; padding: 13px; margin-bottom: 10px; break-inside: avoid; }
+  .project-detail { display: block !important; }
+  .project-toggle { padding: 7px 9px; }
+  a { color: inherit; }
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">AV. / RESUME</div>
+  <div class="actions">
+    <button id="themeButton" type="button" aria-label="Toggle dark mode">☾ Dark mode</button>
+    <button type="button" onclick="window.print()" class="primary">Print / Save PDF</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Personal resume</div>
+      <h1>Anisha Verma</h1>
+      <p class="role">Aspiring Financial Data Analyst</p>
+      <p> Bengaluru, Karnataka, India</p>
+      <p><a href="tel:+917447334063">+91 7447334063</a> &nbsp;·&nbsp;
+         <a href="mailto:anishavblog@gmail.com">anishavblog@gmail.com</a></p>
+      <p><a href="https://www.linkedin.com/in/anisha-verma-76a0a61a0" target="_blank" rel="noopener">LinkedIn profile ↗</a></p>
+    </div>
+    <div class="initials" aria-label="Anisha Verma initials">AV</div>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Resume sections">
+  <a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a>
+  <a href="#projects">Projects</a><a href="#education">Education</a><a href="#certifications">Certifications</a>
+</nav>
+
+<main>
+  <div class="layout">
+    <div>
+      <section class="card" id="about">
+        <h2 class="section-title">Professional summary</h2>
+        <p class="summary">Second-year B.Sc. Statistics &amp; Data Science student with a keen interest in financial markets and quantitative research. Skilled in building and managing large datasets, exception analysis, and translating data into clear, actionable insights using Python, SQL, Excel, and Tableau. Detail-oriented self-starter with strong written and oral communication skills and a track record of synthesizing complex information under tight deadlines.</p>
+      </section>
+
+      <section class="card" id="experience">
+        <h2 class="section-title">Experience</h2>
+        <div class="entry">
+          <h3>Finance Manager Intern</h3>
+          <div class="sub">Internship</div>
+          <ul>
+            <li>Built and reconciled large financial datasets in Excel, improving reporting accuracy and turnaround time.</li>
+            <li>Prepared structured financial and quarterly performance summaries to support faster management reviews.</li>
+            <li>Improved data organization workflows, increasing reporting efficiency.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card" id="projects">
+        <h2 class="section-title">Projects <span class="sub" style="text-transform:none;letter-spacing:0;font-weight:400;">(click to expand)</span></h2>
+        <div class="project open">
+          <button class="project-toggle" type="button" aria-expanded="true">Data Analytics Job Simulation – Deloitte (Forage) <span class="chevron">⌄</span></button>
+          <div class="project-detail">
+            <ul>
+              <li>Analyzed 5,000+ operational records using Excel and Python to identify risk patterns.</li>
+              <li>Cleaned and standardized datasets and built an interactive Tableau dashboard.</li>
+              <li>Presented key business insights highlighting top operational risk drivers.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="project">
+          <button class="project-toggle" type="button" aria-expanded="false">Sales Forecasting Website <span class="chevron">⌄</span></button>
+          <div class="project-detail">
+            <ul>
+              <li>Developed a PHP-MySQL web application to analyse historical sales data.</li>
+              <li>Compared monthly and yearly trends and automated summary reporting.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="project">
+          <button class="project-toggle" type="button" aria-expanded="false">Pomodoro Study Tracker &amp; Analytics Tool <span class="chevron">⌄</span></button>
+          <div class="project-detail">
+            <ul>
+              <li>Built a productivity tracking application to analyse user session data and identify productivity trends.</li>
+              <li>Generated automated daily and weekly performance summaries.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <aside>
+      <section class="card" id="skills">
+        <h2 class="section-title">Technical skills</h2>
+        <div class="skill-group"><strong>Finance</strong><div class="skills"><span class="chip">Financial Data Reconciliation</span><span class="chip">Quarterly Reporting</span><span class="chip">Industry &amp; Market Research</span></div></div>
+        <div class="skill-group"><strong>Languages</strong><div class="skills"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">R</span><span class="chip">JavaScript</span></div></div>
+        <div class="skill-group"><strong>Visualization</strong><div class="skills"><span class="chip">Tableau</span><span class="chip">Excel Charts</span></div></div>
+        <div class="skill-group"><strong>Data analysis</strong><div class="skills"><span class="chip">Data Cleaning</span><span class="chip">EDA</span><span class="chip">Exception Analysis</span><span class="chip">Trend Analysis</span><span class="chip">Forecasting</span></div></div>
+      </section>
+
+      <section class="card" id="education">
+        <h2 class="section-title">Education</h2>
+        <h3 style="font-size:15px;margin:0;">B.Sc. Statistics &amp; Data Science</h3>
+        <p class="sub">Second Year · Christ University</p>
+      </section>
+
+      <section class="card" id="certifications">
+        <h2 class="section-title">Certifications</h2>
+        <ul>
+          <li>Deloitte Data Analytics Job Simulation (Forage)</li>
+          <li>Python for Data Analysis</li>
+          <li>SQL for Data Analysis</li>
+          <li>Stock Market Price Action</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">Quick contact</h2>
+        <div class="contact-list">
+          <a href="mailto:anishavblog@gmail.com">✉ Send an email</a>
+          <a href="tel:+917447334063">☎ Call Anisha</a>
+          <a href="https://www.linkedin.com/in/anisha-verma-76a0a61a0" target="_blank" rel="noopener">↗ View LinkedIn</a>
+        </div>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<footer>© <span id="year"></span> Anisha Verma · Interactive Resume</footer>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const themeButton = document.getElementById("themeButton");
+themeButton.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  const dark = document.body.classList.contains("dark");
+  themeButton.textContent = dark ? "☀ Light mode" : "☾ Dark mode";
+  themeButton.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+});
+
+document.querySelectorAll(".project-toggle").forEach(button => {
+  button.addEventListener("click", () => {
+    const project = button.closest(".project");
+    project.classList.toggle("open");
+    button.setAttribute("aria-expanded", project.classList.contains("open"));
+  });
+});
+</script>
+</body>
+</html>
